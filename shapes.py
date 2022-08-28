@@ -38,7 +38,6 @@ def pil_draw_shape(shape, fish, time):
                 if first:
                     text_coords = (x+0.1*U,y+ 0.1*U)
                     first = False
-                print(x, y)
 
     img = ImageOps.fit(Image.open('coral1.jpg'),out.size)
     img.putalpha(out)
