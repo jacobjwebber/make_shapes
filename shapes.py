@@ -20,8 +20,8 @@ shape = '''\
 '''
 U = 200# * mm # base unit
 
-def pil_draw_shape(shape):
-    text = "🐟6\n⌛2"
+def pil_draw_shape(shape, fish, time):
+    text = f"🐟{fish}\n⌛{time}"
     shape = shape.splitlines()
     X = max([len(line) for line in shape])
     Y = len(shape)
@@ -50,7 +50,6 @@ def pil_draw_shape(shape):
 
 
 if __name__ == "__main__":
-    pil_draw_shape(shape)#shape, 'test.svg')
-    #mask = Image.open('test.svg').convert('L')
+    pil_draw_shape(shape, 6, 2)
 
 
