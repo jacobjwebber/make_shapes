@@ -1,6 +1,12 @@
 import svgwrite
 from svgwrite import cm, mm
 from PIL import Image, ImageOps, ImageDraw, ImageFont
+from itertools import cycle
+import os
+from glob import glob
+
+from shape_data import shapes
+
 
 
 shape = '''\
@@ -20,7 +26,7 @@ shape = '''\
 '''
 U = 200# * mm # base unit
 
-def pil_draw_shape(shape, fish, time, earned_fish, coral_img):
+def pil_draw_shape(shape, fish, time, earned_fish, coral_img, output_file):
     shape = shape.splitlines()
 
     X = max([len(line) for line in shape])
@@ -67,11 +73,18 @@ def pil_draw_shape(shape, fish, time, earned_fish, coral_img):
     for coord in earned_fish_coords:
         img.paste(fish_img, coord, fish_img)
 
-    img.show()
+    img.save(output_file)
 
 
 
 if __name__ == "__main__":
-    pil_draw_shape(shape, 6, 2, 2, 'coral1.jpg')
+    print(len(shapes))
+    os.makedirs('output', exist_ok=True)
+    coral_names = cycle(glob('coral*'))
+    for shape in shapes:
+        print(shape)
+    for i, (shape, fish, time, earned_fish) in enumerate(shapes):
+        print(shape)
+        pil_draw_shape(shape, fish, time, earned_fish, next(coral_names), f'output/shape_{i}.png')
 
 
